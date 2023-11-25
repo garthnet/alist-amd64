@@ -27,7 +27,7 @@ KillMode=process
 WantedBy=multi-user.target
 EOF
 
-# Reload systemd and enable the service
+# Reload systemd, enable the service, and start alist
 systemctl daemon-reload
 systemctl enable alist
 systemctl start alist
