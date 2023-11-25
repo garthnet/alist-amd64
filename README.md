@@ -1,0 +1,1 @@
+# alist-amd64
