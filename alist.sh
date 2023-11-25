@@ -30,6 +30,7 @@ EOF
 # Reload systemd and enable the service
 systemctl daemon-reload
 systemctl enable alist
+systemctl start alist
 
 # Change directory to /opt/alist and set alist admin
 cd /opt/alist
