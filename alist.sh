@@ -85,13 +85,13 @@ CHECK() {
 INSTALL() {
   # 下载 Alist 程序
   echo -e "\r\n${GREEN_COLOR}下载 Alist $VERSION ...${RES}"
-  curl -L https://github.com/xhofe/alist/releases/latest/download/alist-linux-amd64-$ARCH.tar.gz -o /tmp/alist.tar.gz $CURL_BAR
+  curl -L ${GH_PROXY}https://github.com/xhofe/alist/releases/latest/download/alist-linux-amd64 -o /tmp/alist.tar.gz $CURL_BAR
   tar zxf /tmp/alist.tar.gz -C $INSTALL_PATH/
 
   if [ -f $INSTALL_PATH/alist ]; then
     echo -e "${GREEN_COLOR} 下载成功 ${RES}"
   else
-    echo -e "${RED_COLOR}下载 alist-linux-amd64-$ARCH.tar.gz 失败！${RES}"
+    echo -e "${RED_COLOR}下载 alist-linux-amd64 失败！${RES}"
     exit 1
   fi
 
@@ -191,12 +191,12 @@ UPDATE() {
     # 备份 alist 二进制文件，供下载更新失败回退
     cp $INSTALL_PATH/alist /tmp/alist.bak
     echo -e "${GREEN_COLOR}下载 Alist $VERSION ...${RES}"
-    curl -L https://github.com/xhofe/alist/releases/latest/download/alist-linux-amd64-$ARCH.tar.gz -o /tmp/alist.tar.gz $CURL_BAR
+    curl -L ${GH_PROXY}https://github.com/xhofe/alist/releases/latest/download/alist-linux-amd64 -o /tmp/alist.tar.gz $CURL_BAR
     tar zxf /tmp/alist.tar.gz -C $INSTALL_PATH/
     if [ -f $INSTALL_PATH/alist ]; then
       echo -e "${GREEN_COLOR} 下载成功 ${RES}"
     else
-      echo -e "${RED_COLOR}下载 alist-linux-amd64-$ARCH.tar.gz 出错，更新失败！${RES}"
+      echo -e "${RED_COLOR}下载 alist-linux-amd64 出错，更新失败！${RES}"
       echo "回退所有更改 ..."
       mv /tmp/alist.bak $INSTALL_PATH/alist
       systemctl start alist
