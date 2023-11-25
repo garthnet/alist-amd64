@@ -1,8 +1,16 @@
-#手动安装最近版Aliast-AMD64
+#!/bin/bash
+
+# Download alist binary
 curl -L https://github.com/xhofe/alist/releases/latest/download/alist-linux-amd64.tar.gz -o /tmp/alist-linux-amd64.tar.gz
+
+# Create directory and extract files
+mkdir /opt/alist
 tar zxf /tmp/alist-linux-amd64.tar.gz -C /opt/alist
+
+# Clean up temporary files
 rm -f /tmp/alist*
 
+# Create systemd service file
 cat >/etc/systemd/system/alist.service <<EOF
 [Unit]
 Description=Alist service
@@ -18,4 +26,11 @@ KillMode=process
 [Install]
 WantedBy=multi-user.target
 EOF
-systemctl daemon-reload && systemctl enable alist && cd /opt/alst && ./alist admin set 5244
+
+# Reload systemd and enable the service
+systemctl daemon-reload
+systemctl enable alist
+
+# Change directory to /opt/alist and set alist admin
+cd /opt/alist
+./alist admin set 5244
